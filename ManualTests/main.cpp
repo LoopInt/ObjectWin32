@@ -6,7 +6,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 {
     Instance::init(hInstance);
 
-    MainWindow w((Window*)nullptr);
+    MainWindow w;
 
     w.create(hInstance);
     w.show();
