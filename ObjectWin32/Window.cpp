@@ -94,6 +94,15 @@ unsigned int Window::getXPosition() const
     return rect.left;
 }
 
+unsigned int Window::getYPosition() const
+{
+    RECT rect;
+    if (!GetWindowRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+    return rect.right;
+}
+
 LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     return DefWindowProc(hwnd, uMsg, wParam, lParam);

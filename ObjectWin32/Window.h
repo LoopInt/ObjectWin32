@@ -18,6 +18,7 @@ public:
 	unsigned int getHeight() const;
 	//position
 	unsigned int getXPosition() const;
+	unsigned int getYPosition() const;
 
 private:
 	LRESULT WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

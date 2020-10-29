@@ -20,6 +20,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     unsigned int width = w.getWidth();
     unsigned int height = w.getHeight();
     unsigned int xPos = w.getXPosition();
+    unsigned int yPos = w.getYPosition();
 
     guiThread.join();
     
