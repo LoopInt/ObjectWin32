@@ -15,6 +15,7 @@ public:
 
 	//size
 	unsigned int getWidth() const;
+	unsigned int getHeight() const;
 
 private:
 	LRESULT WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
