@@ -12,6 +12,10 @@ public:
 	static LRESULT CALLBACK RouterWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	void create(HINSTANCE hInstance);
 	void show();
+
+	//size
+	unsigned int getWidth() const;
+
 private:
 	LRESULT WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	std::wstring label;

@@ -67,6 +67,15 @@ void Window::show()
     ShowWindow(this->hwnd, true);
 }
 
+unsigned int Window::getWidth() const
+{
+    RECT rect;
+    if (!GetWindowRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+    return rect.right - rect.left;
+}
+
 LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
