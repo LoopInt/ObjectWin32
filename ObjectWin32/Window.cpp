@@ -85,6 +85,15 @@ unsigned int Window::getHeight() const
     return rect.bottom - rect.top;
 }
 
+unsigned int Window::getXPosition() const
+{
+    RECT rect;
+    if (!GetWindowRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+    return rect.left;
+}
+
 LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
