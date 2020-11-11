@@ -14,6 +14,7 @@ public:
 	//visivbility
 	void show();
 	void minimize();
+	void maximize();
 
 	//size
 	unsigned int getWidth() const;

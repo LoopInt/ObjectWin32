@@ -257,3 +257,16 @@ TEST(Window, minimizeWindow) {
 
     ASSERT_EQ(IsIconic(w.getHandle()), true);
 }
+
+TEST(Window, maximizeWindow) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.minimize();
+    w.maximize();
+
+    ASSERT_EQ(IsIconic(w.getHandle()), false);
+}
