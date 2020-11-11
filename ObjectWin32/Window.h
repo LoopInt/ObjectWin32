@@ -19,10 +19,17 @@ public:
 	//position
 	unsigned int getXPosition() const;
 	unsigned int getYPosition() const;
+	//minimize button
+	void disableMinimizeButton();
+	void enableMinimizeButton();
 
 private:
 	LRESULT WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	std::wstring label;
 	Window* parent;
+
+	int generateWindowStyle() const;
+
+	bool minimizeButton;
 };
 

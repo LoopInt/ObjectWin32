@@ -3,13 +3,15 @@
 
 Window::Window():
     label(L"ObjectWin32 Window"),
-    parent(nullptr)
+    parent(nullptr),
+    minimizeButton(true)
 {
 }
 
 Window::Window(Window* newParent):
     label(L"ObjectWin32 Window"),
-    parent(newParent)
+    parent(newParent),
+    minimizeButton(true)
 {
     
 }
@@ -44,11 +46,13 @@ void Window::create(HINSTANCE hInstance)
         parentHandle = this->parent->getHandle();
     }
 
+    int windowStyle = this->generateWindowStyle();
+
     this->hwnd = CreateWindowEx(
         0,                              // Optional window styles.
         WindowClassName,                     // Window class
         (LPCWSTR)this->label.c_str(),    // Window text
-        WS_OVERLAPPEDWINDOW,            // Window style
+        windowStyle,            // Window style
         // Size and position
         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
         parentHandle,       // Parent window    
@@ -103,7 +107,32 @@ unsigned int Window::getYPosition() const
     return rect.top;
 }
 
+void Window::disableMinimizeButton()
+{
+    this->minimizeButton = false;
+}
+
+void Window::enableMinimizeButton()
+{
+    this->minimizeButton = true;
+}
+
 LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+int Window::generateWindowStyle() const
+{
+    int windowStyle = WS_OVERLAPPED | 
+        WS_CAPTION | 
+        WS_SYSMENU | 
+        WS_THICKFRAME | 
+        WS_MAXIMIZEBOX;
+
+    if (this->minimizeButton) {
+        windowStyle = windowStyle | WS_MINIMIZEBOX;
+    }
+
+    return windowStyle;
 }

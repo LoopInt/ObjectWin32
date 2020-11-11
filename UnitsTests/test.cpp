@@ -135,3 +135,30 @@ TEST(Window, getPosY) {
     unsigned int posY = w.getYPosition();
     ASSERT_EQ(posY, 75);
 }
+
+TEST(Window, disableMinimizeButton) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.disableMinimizeButton();
+
+    w.create(GetModuleHandle(NULL));
+
+    long windowStyle = GetWindowLongA(w.getHandle(), GWL_STYLE);
+    ASSERT_EQ((bool) (windowStyle & WS_MINIMIZEBOX), false);
+}
+
+TEST(Window, enableMinimizeButton) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.disableMinimizeButton();
+    w.enableMinimizeButton();
+
+    w.create(GetModuleHandle(NULL));
+
+    long windowStyle = GetWindowLongA(w.getHandle(), GWL_STYLE);
+    ASSERT_EQ((bool)(windowStyle & WS_MINIMIZEBOX), true);
+}
