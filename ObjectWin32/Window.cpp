@@ -83,6 +83,16 @@ void Window::maximize()
     ShowWindow(this->hwnd, SW_MAXIMIZE);
 }
 
+bool Window::isMinimized() const
+{
+    return IsIconic(this->hwnd);
+}
+
+bool Window::isMaximized() const
+{
+    return !IsIconic(this->hwnd);
+}
+
 unsigned int Window::getWidth() const
 {
     RECT rect;

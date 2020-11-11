@@ -15,6 +15,8 @@ public:
 	void show();
 	void minimize();
 	void maximize();
+	bool isMinimized() const;
+	bool isMaximized() const;
 
 	//size
 	unsigned int getWidth() const;
