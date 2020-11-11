@@ -11,7 +11,9 @@ public:
 	~Window();
 	static LRESULT CALLBACK RouterWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	void create(HINSTANCE hInstance);
+	//visivbility
 	void show();
+	void minimize();
 
 	//size
 	unsigned int getWidth() const;

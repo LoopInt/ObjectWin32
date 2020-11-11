@@ -245,3 +245,15 @@ TEST(Window, enableMaximizeButtonAfterCreation) {
     long windowStyle = GetWindowLongA(w.getHandle(), GWL_STYLE);
     ASSERT_EQ((bool)(windowStyle & WS_MAXIMIZEBOX), true);
 }
+
+TEST(Window, minimizeWindow) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.minimize();
+
+    ASSERT_EQ(IsIconic(w.getHandle()), true);
+}

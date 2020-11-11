@@ -73,6 +73,11 @@ void Window::show()
     ShowWindow(this->hwnd, true);
 }
 
+void Window::minimize()
+{
+    ShowWindow(this->hwnd, SW_MINIMIZE);
+}
+
 unsigned int Window::getWidth() const
 {
     RECT rect;
