@@ -6,6 +6,8 @@
 #include "Instance.h"
 
 TEST(Window, CreateWindow) {
+    Instance::init(GetModuleHandle(NULL));
+
 	Window w;
 	FAKE_GLOBAL(CreateWindowEx);
 
@@ -48,4 +50,46 @@ TEST(Window, CreateWindowFailedWithNullHandle) {
         std::string str = "Window creation failed.";
         ASSERT_EQ(e, str);
     }
+}
+
+TEST(Window, getWidth) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    SetWindowPos(
+        w.getHandle(),
+        NULL,
+        50,
+        75,
+        300,
+        250,
+        SWP_SHOWWINDOW
+    );
+
+   unsigned int width = w.getWidth();
+   ASSERT_EQ(width, 300);
+}
+
+TEST(Window, getHeight) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    SetWindowPos(
+        w.getHandle(),
+        NULL,
+        50,
+        75,
+        300,
+        250,
+        SWP_SHOWWINDOW
+    );
+
+    unsigned int height = w.getHeight();
+    ASSERT_EQ(height, 250);
 }
