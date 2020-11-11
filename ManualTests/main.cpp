@@ -32,6 +32,9 @@ void guiRun(HINSTANCE hInstance, MainWindow &w) {
     //w.disableMinimizeButton();
     //w.enableMinimizeButton();
 
+    //w.disableMaximizeButton();
+    //w.enableMinimizeButton();
+
     w.create(hInstance);
     w.show();
 

@@ -4,14 +4,16 @@
 Window::Window():
     label(L"ObjectWin32 Window"),
     parent(nullptr),
-    minimizeButton(true)
+    minimizeButton(true),
+    maximizeButton(true)
 {
 }
 
 Window::Window(Window* newParent):
     label(L"ObjectWin32 Window"),
     parent(newParent),
-    minimizeButton(true)
+    minimizeButton(true),
+    maximizeButton(true)
 {
     
 }
@@ -107,14 +109,36 @@ unsigned int Window::getYPosition() const
     return rect.top;
 }
 
+void Window::disableMaximizeButton()
+{
+    this->maximizeButton = false;
+    if (this->getHandle()) {
+        this->updateStyle();
+    }    
+}
+
+void Window::enableMaximizeButton()
+{
+    this->maximizeButton = true;
+    if (this->getHandle()) {
+        this->updateStyle();
+    }
+}
+
 void Window::disableMinimizeButton()
 {
     this->minimizeButton = false;
+    if (this->getHandle()) {
+        this->updateStyle();
+    }
 }
 
 void Window::enableMinimizeButton()
 {
     this->minimizeButton = true;
+    if (this->getHandle()) {
+        this->updateStyle();
+    }
 }
 
 LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -127,12 +151,20 @@ int Window::generateWindowStyle() const
     int windowStyle = WS_OVERLAPPED | 
         WS_CAPTION | 
         WS_SYSMENU | 
-        WS_THICKFRAME | 
-        WS_MAXIMIZEBOX;
+        WS_THICKFRAME;
 
     if (this->minimizeButton) {
         windowStyle = windowStyle | WS_MINIMIZEBOX;
     }
 
+    if (this->maximizeButton) {
+        windowStyle = windowStyle | WS_MAXIMIZEBOX;
+    }
+
     return windowStyle;
+}
+
+void Window::updateStyle()
+{
+    SetWindowLongA(this->hwnd, GWL_STYLE, this->generateWindowStyle());
 }

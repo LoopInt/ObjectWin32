@@ -19,6 +19,9 @@ public:
 	//position
 	unsigned int getXPosition() const;
 	unsigned int getYPosition() const;
+	//maximize button
+	void disableMaximizeButton();
+	void enableMaximizeButton();
 	//minimize button
 	void disableMinimizeButton();
 	void enableMinimizeButton();
@@ -29,7 +32,9 @@ private:
 	Window* parent;
 
 	int generateWindowStyle() const;
+	void updateStyle();
 
 	bool minimizeButton;
+	bool maximizeButton;
 };
 

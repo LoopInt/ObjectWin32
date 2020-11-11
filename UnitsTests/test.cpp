@@ -162,3 +162,86 @@ TEST(Window, enableMinimizeButton) {
     long windowStyle = GetWindowLongA(w.getHandle(), GWL_STYLE);
     ASSERT_EQ((bool)(windowStyle & WS_MINIMIZEBOX), true);
 }
+
+TEST(Window, disableMaximizeButton) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.disableMaximizeButton();
+
+    w.create(GetModuleHandle(NULL));
+
+    long windowStyle = GetWindowLongA(w.getHandle(), GWL_STYLE);
+    ASSERT_EQ((bool)(windowStyle & WS_MAXIMIZEBOX), false);
+}
+
+TEST(Window, enableMaximizeButton) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.disableMaximizeButton();
+    w.enableMaximizeButton();
+
+    w.create(GetModuleHandle(NULL));
+
+    long windowStyle = GetWindowLongA(w.getHandle(), GWL_STYLE);
+    ASSERT_EQ((bool)(windowStyle & WS_MAXIMIZEBOX), true);
+}
+
+TEST(Window, disableMinimizeButtonAfterCreation) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.disableMinimizeButton();
+
+    long windowStyle = GetWindowLongA(w.getHandle(), GWL_STYLE);
+    ASSERT_EQ((bool)(windowStyle & WS_MINIMIZEBOX), false);
+}
+
+TEST(Window, enableMinimizeButtonAfterCreation) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.disableMinimizeButton();
+
+    w.create(GetModuleHandle(NULL));
+
+    w.enableMinimizeButton();
+
+    long windowStyle = GetWindowLongA(w.getHandle(), GWL_STYLE);
+    ASSERT_EQ((bool)(windowStyle & WS_MINIMIZEBOX), true);
+}
+
+TEST(Window, disableMaximizeButtonAfterCreation) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.disableMaximizeButton();
+
+    long windowStyle = GetWindowLongA(w.getHandle(), GWL_STYLE);
+    ASSERT_EQ((bool)(windowStyle & WS_MAXIMIZEBOX), false);
+}
+
+TEST(Window, enableMaximizeButtonAfterCreation) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.disableMaximizeButton();
+
+    w.create(GetModuleHandle(NULL));
+
+    w.enableMaximizeButton();
+
+    long windowStyle = GetWindowLongA(w.getHandle(), GWL_STYLE);
+    ASSERT_EQ((bool)(windowStyle & WS_MAXIMIZEBOX), true);
+}
