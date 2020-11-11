@@ -100,7 +100,7 @@ unsigned int Window::getYPosition() const
     if (!GetWindowRect(this->hwnd, &rect)) {
         throw(GetLastError());
     }
-    return rect.right;
+    return rect.top;
 }
 
 LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

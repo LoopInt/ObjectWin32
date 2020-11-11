@@ -93,3 +93,45 @@ TEST(Window, getHeight) {
     unsigned int height = w.getHeight();
     ASSERT_EQ(height, 250);
 }
+
+TEST(Window, getPosX) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    SetWindowPos(
+        w.getHandle(),
+        NULL,
+        50,
+        75,
+        300,
+        250,
+        SWP_SHOWWINDOW
+    );
+
+    unsigned int posX = w.getXPosition();
+    ASSERT_EQ(posX, 50);
+}
+
+TEST(Window, getPosY) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    SetWindowPos(
+        w.getHandle(),
+        NULL,
+        50,
+        75,
+        300,
+        250,
+        SWP_SHOWWINDOW
+    );
+
+    unsigned int posY = w.getYPosition();
+    ASSERT_EQ(posY, 75);
+}
