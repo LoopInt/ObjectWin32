@@ -14,7 +14,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     std::thread guiThread(guiRun, hInstance, std::ref(w));
 
-    Sleep(5000);
+    Sleep(2000);
 
     //w.minimize();
 
@@ -22,6 +22,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     //unsigned int height = w.getHeight();
     //unsigned int xPos = w.getXPosition();
     //unsigned int yPos = w.getYPosition();
+
+    //w.setWidth(500);
+    //w.setHeight(500);
+    w.setSize(500, 400);
 
     guiThread.join();
     

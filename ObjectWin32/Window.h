@@ -21,6 +21,9 @@ public:
 	//size
 	unsigned int getWidth() const;
 	unsigned int getHeight() const;
+	void setWidth(unsigned int newWidth);
+	void setHeight(unsigned int newHeight);
+	void setSize(const unsigned int newWidth, const unsigned int newHeight);
 	//position
 	unsigned int getXPosition() const;
 	unsigned int getYPosition() const;

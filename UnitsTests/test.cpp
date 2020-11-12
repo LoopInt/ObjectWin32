@@ -292,3 +292,56 @@ TEST(Window, isMinimizedWindow) {
 
     ASSERT_EQ(w.isMinimized(), true);
 }
+
+TEST(Window, setWidth) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setWidth(300);
+
+    RECT rect;
+    GetWindowRect(w.getHandle(), &rect);
+
+    unsigned int width = rect.right - rect.left;
+
+    ASSERT_EQ(width, 300);
+}
+
+TEST(Window, setHeight) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setHeight(400);
+
+    RECT rect;
+    GetWindowRect(w.getHandle(), &rect);
+
+    unsigned int height = rect.bottom - rect.top;
+
+    ASSERT_EQ(height, 400);
+}
+
+TEST(Window, setSize) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setSize(300, 400);
+
+    RECT rect;
+    GetWindowRect(w.getHandle(), &rect);
+
+    unsigned int height = rect.bottom - rect.top;
+    unsigned int width = rect.right - rect.left;
+
+    ASSERT_EQ(width, 300);
+    ASSERT_EQ(height, 400);
+}

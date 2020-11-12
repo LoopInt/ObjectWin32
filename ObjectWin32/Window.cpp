@@ -111,6 +111,37 @@ unsigned int Window::getHeight() const
     return rect.bottom - rect.top;
 }
 
+void Window::setWidth(unsigned int newWidth)
+{
+    RECT rect;
+    if (!GetWindowRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+
+    if (!SetWindowPos(this->hwnd, NULL, 0, 0, newWidth, rect.bottom - rect.top, SWP_NOMOVE)) {
+        throw(GetLastError());
+    }
+}
+
+void Window::setHeight(unsigned int newHeight)
+{
+    RECT rect;
+    if (!GetWindowRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+
+    if (!SetWindowPos(this->hwnd, NULL, 0, 0, rect.right - rect.left, newHeight, SWP_NOMOVE)) {
+        throw(GetLastError());
+    }
+}
+
+void Window::setSize(const unsigned int newWidth, const unsigned int newHeight)
+{
+    if (!SetWindowPos(this->hwnd, NULL, 0, 0, newWidth, newHeight, SWP_NOMOVE)) {
+        throw(GetLastError());
+    }
+}
+
 unsigned int Window::getXPosition() const
 {
     RECT rect;
