@@ -4,6 +4,7 @@
 
 #include "Window.h"
 #include "Instance.h"
+#include "File.h"
 
 TEST(Window, CreateWindow) {
     Instance::init(GetModuleHandle(NULL));
@@ -344,4 +345,12 @@ TEST(Window, setSize) {
 
     ASSERT_EQ(width, 300);
     ASSERT_EQ(height, 400);
+}
+
+TEST(File, fileNotFound) {
+    File file;
+
+    bool fileFound = file.openReadOnly("E:\\Documents\\Projects\\ObjectWin32\\lol.txt");
+
+    ASSERT_EQ(fileFound, false);
 }
