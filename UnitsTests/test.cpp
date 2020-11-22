@@ -375,6 +375,12 @@ TEST(File, readTextFile) {
     ASSERT_EQ(text, "hello world !");    
 }
 
+TEST(File, readFileDoesntOpen) {
+    File file;
+
+    ASSERT_THROW(file.read(), std::string);
+}
+
 TEST(File, getFileSize) {
     File file;
 
