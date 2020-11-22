@@ -9,6 +9,11 @@ File::~File()
 {
 }
 
+bool File::close()
+{
+	return CloseHandle(this->fileHandle);
+}
+
 bool File::openReadOnly(const std::string& fileName)
 {
 	this->fileHandle = CreateFileA(

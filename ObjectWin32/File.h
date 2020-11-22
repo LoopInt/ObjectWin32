@@ -9,6 +9,7 @@ public:
 	File();
 	~File();
 
+	bool close();
 	bool openReadOnly(const std::string& fileName);
 	std::string read();
 	unsigned long getSize() const;

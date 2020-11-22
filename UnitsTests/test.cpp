@@ -392,3 +392,19 @@ TEST(File, getFileSize) {
 
     ASSERT_EQ(size, 13);
 }
+
+TEST(File, closeOpenedFile) {
+    File file;
+
+    bool fileFound = file.openReadOnly("E:\\Documents\\Projects\\ObjectWin32\\text.txt");
+
+    ASSERT_EQ(fileFound, true);
+
+    ASSERT_EQ(file.close(), true);
+}
+
+TEST(File, closeClosedFile) {
+    File file;
+
+    ASSERT_EQ(file.close(), false);
+}
