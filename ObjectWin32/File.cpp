@@ -32,5 +32,31 @@ bool File::openReadOnly(const std::string& fileName)
 
 std::string File::read()
 {
-	return std::string();
+	unsigned long fileSize = this->getSize();
+
+	char* buffer = new char[fileSize+1];
+	buffer[fileSize] = '\0';
+
+	ReadFile(
+		this->fileHandle,
+		buffer,
+		fileSize,
+		nullptr,
+		NULL
+	);
+
+	std::string text = buffer;
+	delete[] buffer;
+
+	return text;
+}
+
+unsigned long File::getSize() const
+{
+	unsigned long fileSize = GetFileSize(
+		this->fileHandle,
+		nullptr
+	);
+
+	return fileSize;
 }

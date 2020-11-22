@@ -354,3 +354,35 @@ TEST(File, fileNotFound) {
 
     ASSERT_EQ(fileFound, false);
 }
+
+TEST(File, fileFound) {
+    File file;
+
+    bool fileFound = file.openReadOnly("E:\\Documents\\Projects\\ObjectWin32\\text.txt");
+
+    ASSERT_EQ(fileFound, true);
+}
+
+TEST(File, readTextFile) {
+    File file;
+
+    bool fileFound = file.openReadOnly("E:\\Documents\\Projects\\ObjectWin32\\text.txt");
+
+    ASSERT_EQ(fileFound, true);
+
+    std::string&& text = file.read();
+
+    ASSERT_EQ(text, "hello world !");    
+}
+
+TEST(File, getFileSize) {
+    File file;
+
+    bool fileFound = file.openReadOnly("E:\\Documents\\Projects\\ObjectWin32\\text.txt");
+
+    ASSERT_EQ(fileFound, true);
+
+    unsigned long size = file.getSize();
+
+    ASSERT_EQ(size, 13);
+}

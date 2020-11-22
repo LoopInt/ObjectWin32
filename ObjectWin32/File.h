@@ -11,6 +11,7 @@ public:
 
 	bool openReadOnly(const std::string& fileName);
 	std::string read();
+	unsigned long getSize() const;
 private:
 	HANDLE fileHandle;
 };
