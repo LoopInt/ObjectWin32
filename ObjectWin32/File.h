@@ -11,7 +11,10 @@ public:
 
 	bool close();
 	bool openReadOnly(const std::string& fileName);
+
 	std::string read();
+	std::string readChars(unsigned int nbChar);
+
 	unsigned long getSize() const;
 private:
 	HANDLE fileHandle;

@@ -59,6 +59,29 @@ std::string File::read()
 	return text;
 }
 
+std::string File::readChars(unsigned int nbChar)
+{
+	if (this->fileHandle == NULL) {
+		throw std::string("File isn't open.");
+	}
+
+	char* buffer = new char[nbChar + 1];
+	buffer[nbChar] = '\0';
+
+	ReadFile(
+		this->fileHandle,
+		buffer,
+		nbChar,
+		nullptr,
+		NULL
+	);
+
+	std::string text = buffer;
+	delete[] buffer;
+
+	return text;
+}
+
 unsigned long File::getSize() const
 {
 	unsigned long fileSize = GetFileSize(

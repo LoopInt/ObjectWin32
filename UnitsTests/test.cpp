@@ -408,3 +408,21 @@ TEST(File, closeClosedFile) {
 
     ASSERT_EQ(file.close(), false);
 }
+
+TEST(File, readCharsFile) {
+    File file;
+
+    bool fileFound = file.openReadOnly("E:\\Documents\\Projects\\ObjectWin32\\text.txt");
+
+    ASSERT_EQ(fileFound, true);
+
+    std::string&& text = file.readChars(5);
+
+    ASSERT_EQ(text, "hello");
+}
+
+TEST(File, readCharsFileDoesntOpen) {
+    File file;
+
+    ASSERT_THROW(file.readChars(10), std::string);
+}
