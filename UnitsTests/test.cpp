@@ -426,3 +426,53 @@ TEST(File, readCharsFileDoesntOpen) {
 
     ASSERT_THROW(file.readChars(10), std::string);
 }
+
+TEST(File, getCursorPosition) {
+    File file;
+
+    bool fileFound = file.openReadOnly("E:\\Documents\\Projects\\ObjectWin32\\text.txt");
+    std::string&& text = file.readChars(5);
+    unsigned long cursorPosition = file.getCursorPosition();
+
+    ASSERT_EQ(cursorPosition, 5);
+}
+
+TEST(File, getCursorPositionWithCloseFile) {
+    File file;
+
+    ASSERT_THROW(file.getCursorPosition(), std::string);
+}
+
+TEST(File, setCursorPosition) {
+    File file;
+
+    bool fileFound = file.openReadOnly("E:\\Documents\\Projects\\ObjectWin32\\text.txt");
+    
+    file.setCursorPosition(6);
+
+    std::string&& text = file.readChars(5);
+
+    ASSERT_EQ(text, "world");
+}
+
+TEST(File, moveCursorPositionPositive) {
+    File file;
+
+    bool fileFound = file.openReadOnly("E:\\Documents\\Projects\\ObjectWin32\\text.txt");
+
+    file.setCursorPosition(5);
+    file.moveCursorPosition(2);    
+
+    ASSERT_EQ(file.getCursorPosition(), 7);
+}
+
+TEST(File, moveCursorPositionNegative) {
+    File file;
+
+    bool fileFound = file.openReadOnly("E:\\Documents\\Projects\\ObjectWin32\\text.txt");
+
+    file.setCursorPosition(5);
+    file.moveCursorPosition(-2);
+
+    ASSERT_EQ(file.getCursorPosition(), 3);
+}

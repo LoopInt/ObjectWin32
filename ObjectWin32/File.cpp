@@ -37,9 +37,8 @@ bool File::openReadOnly(const std::string& fileName)
 
 std::string File::read()
 {
-	if (this->fileHandle == NULL) {
-		throw std::string("File isn't open.");
-	}
+	this->checkOpening();
+
 	unsigned long fileSize = this->getSize();
 
 	char* buffer = new char[fileSize+1];
@@ -61,9 +60,7 @@ std::string File::read()
 
 std::string File::readChars(unsigned int nbChar)
 {
-	if (this->fileHandle == NULL) {
-		throw std::string("File isn't open.");
-	}
+	this->checkOpening();
 
 	char* buffer = new char[nbChar + 1];
 	buffer[nbChar] = '\0';
@@ -82,6 +79,56 @@ std::string File::readChars(unsigned int nbChar)
 	return text;
 }
 
+unsigned long File::getCursorPosition() const
+{
+	this->checkOpening();
+
+	unsigned long cursorPosition = SetFilePointer(
+		this->fileHandle,
+		0,
+		NULL,
+		FILE_CURRENT
+	);
+
+	if (cursorPosition == INVALID_SET_FILE_POINTER) {
+		throw std::string("Read cursor position failed.");
+	}
+
+	return cursorPosition;
+}
+
+void File::setCursorPosition(unsigned long cursorPosition)
+{
+	this->checkOpening();
+
+	cursorPosition = SetFilePointer(
+		this->fileHandle,
+		cursorPosition,
+		NULL,
+		FILE_BEGIN
+	);
+
+	if (cursorPosition == INVALID_SET_FILE_POINTER) {
+		throw std::string("Read cursor position failed.");
+	}
+}
+
+void File::moveCursorPosition(long cursorOffset)
+{
+	this->checkOpening();
+
+	unsigned long cursorPosition = SetFilePointer(
+		this->fileHandle,
+		cursorOffset,
+		NULL,
+		FILE_CURRENT
+	);
+
+	if (cursorPosition == INVALID_SET_FILE_POINTER) {
+		throw std::string("Read cursor position failed.");
+	}
+}
+
 unsigned long File::getSize() const
 {
 	unsigned long fileSize = GetFileSize(
@@ -90,4 +137,11 @@ unsigned long File::getSize() const
 	);
 
 	return fileSize;
+}
+
+void File::checkOpening() const
+{
+	if (this->fileHandle == nullptr) {
+		throw std::string("File isn't open.");
+	}
 }
