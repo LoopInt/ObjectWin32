@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "Instance.h"
+#include "Button.h"
 #include <thread>
 
 void guiRun(HINSTANCE hInstance, MainWindow &w);
@@ -43,6 +44,7 @@ void guiRun(HINSTANCE hInstance, MainWindow &w) {
 
     w.create(hInstance);
     w.show();
+    Button b(w);
 
     Instance::run();
 }
