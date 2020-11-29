@@ -111,6 +111,24 @@ unsigned int Window::getHeight() const
     return rect.bottom - rect.top;
 }
 
+unsigned int Window::getClientWidth() const
+{
+    RECT rect;
+    if (!GetClientRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+    return rect.right;
+}
+
+unsigned int Window::getClientHeight() const
+{
+    RECT rect;
+    if (!GetClientRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+    return rect.bottom;
+}
+
 void Window::setWidth(unsigned int newWidth)
 {
     RECT rect;

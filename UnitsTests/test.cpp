@@ -95,6 +95,82 @@ TEST(Window, getHeight) {
     ASSERT_EQ(height, 250);
 }
 
+TEST(Window, getClientWidth) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    RECT rect;
+    rect.left = 50;
+    rect.right = 250;
+    rect.top = 50;
+    rect.bottom = 145;
+
+    AdjustWindowRect(
+        &rect,
+        WS_OVERLAPPED |
+        WS_CAPTION |
+        WS_SYSMENU |
+        WS_THICKFRAME | 
+        WS_MINIMIZEBOX |
+        WS_MAXIMIZEBOX,
+        NULL
+    );
+
+    SetWindowPos(
+        w.getHandle(),
+        NULL,
+        rect.left,
+        rect.top,
+        rect.right - rect.left,
+        rect.bottom - rect.top,
+        SWP_SHOWWINDOW
+    );
+
+    unsigned int clientWidth = w.getClientWidth();
+    ASSERT_EQ(clientWidth, 200);
+}
+
+TEST(Window, getClientHeight) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    RECT rect;
+    rect.left = 50;
+    rect.right = 250;
+    rect.top = 50;
+    rect.bottom = 145;
+
+    AdjustWindowRect(
+        &rect,
+        WS_OVERLAPPED |
+        WS_CAPTION |
+        WS_SYSMENU |
+        WS_THICKFRAME |
+        WS_MINIMIZEBOX |
+        WS_MAXIMIZEBOX,
+        NULL
+    );
+
+    SetWindowPos(
+        w.getHandle(),
+        NULL,
+        rect.left,
+        rect.top,
+        rect.right - rect.left,
+        rect.bottom - rect.top,
+        SWP_SHOWWINDOW
+    );
+
+    unsigned int clientHeight = w.getClientHeight();
+    ASSERT_EQ(clientHeight, 95);
+}
+
 TEST(Window, getPosX) {
     Instance::init(GetModuleHandle(NULL));
 
