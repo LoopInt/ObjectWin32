@@ -347,6 +347,52 @@ TEST(Window, setSize) {
     ASSERT_EQ(height, 400);
 }
 
+TEST(Window, setXPos) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setXPosition(400);
+
+    RECT rect;
+    GetWindowRect(w.getHandle(), &rect);
+
+    ASSERT_EQ(rect.left, 400);
+}
+
+TEST(Window, setYPos) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setYPosition(200);
+
+    RECT rect;
+    GetWindowRect(w.getHandle(), &rect);
+
+    ASSERT_EQ(rect.top, 200);
+}
+
+TEST(Window, setPos) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setPosition(400, 200);
+
+    RECT rect;
+    GetWindowRect(w.getHandle(), &rect);
+
+    ASSERT_EQ(rect.left, 400);
+    ASSERT_EQ(rect.top, 200);
+}
+
 TEST(File, fileNotFound) {
     File file;
 

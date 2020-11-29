@@ -160,6 +160,37 @@ unsigned int Window::getYPosition() const
     return rect.top;
 }
 
+void Window::setXPosition(const unsigned int newPosX)
+{
+    RECT rect;
+    if (!GetWindowRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+
+    if (!SetWindowPos(this->hwnd, NULL, newPosX, rect.top, 0, 0, SWP_NOSIZE)) {
+        throw(GetLastError());
+    }
+}
+
+void Window::setYPosition(const unsigned int newPosY)
+{
+    RECT rect;
+    if (!GetWindowRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+
+    if (!SetWindowPos(this->hwnd, NULL, rect.left, newPosY, 0, 0, SWP_NOSIZE)) {
+        throw(GetLastError());
+    }
+}
+
+void Window::setPosition(const unsigned int newPosX, const unsigned int newPosY)
+{
+    if (!SetWindowPos(this->hwnd, NULL, newPosX, newPosY, 0, 0, SWP_NOSIZE)) {
+        throw(GetLastError());
+    }
+}
+
 void Window::disableMaximizeButton()
 {
     this->maximizeButton = false;

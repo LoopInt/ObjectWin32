@@ -27,6 +27,9 @@ public:
 	//position
 	unsigned int getXPosition() const;
 	unsigned int getYPosition() const;
+	void setXPosition(const unsigned int newPosX);
+	void setYPosition(const unsigned int newPosY);
+	void setPosition(const unsigned int newPosX, const unsigned int newPosY);
 	//maximize button
 	void disableMaximizeButton();
 	void enableMaximizeButton();
