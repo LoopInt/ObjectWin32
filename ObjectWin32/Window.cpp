@@ -160,6 +160,92 @@ void Window::setSize(const unsigned int newWidth, const unsigned int newHeight)
     }
 }
 
+void Window::setClientWidth(unsigned int newWidth)
+{
+    RECT rectClient;
+    
+    if (!GetClientRect(this->hwnd, &rectClient)) {
+        throw(GetLastError());
+    }
+
+    rectClient.right = 50 + newWidth;
+    rectClient.left = 50;
+
+    AdjustWindowRect(
+        &rectClient,
+        this->generateWindowStyle(),
+        NULL
+    );
+
+    SetWindowPos(
+        this->hwnd,
+        NULL,
+        0,
+        0,
+        rectClient.right - rectClient.left,
+        rectClient.bottom - rectClient.top,
+        SWP_NOMOVE
+    );
+}
+
+void Window::setClientHeight(unsigned int newHeight)
+{
+    RECT rectClient;
+
+    if (!GetClientRect(this->hwnd, &rectClient)) {
+        throw(GetLastError());
+    }
+
+    rectClient.bottom = 50 + newHeight;
+    rectClient.top = 50;
+
+    AdjustWindowRect(
+        &rectClient,
+        this->generateWindowStyle(),
+        NULL
+    );
+
+    SetWindowPos(
+        this->hwnd,
+        NULL,
+        0,
+        0,
+        rectClient.right - rectClient.left,
+        rectClient.bottom - rectClient.top,
+        SWP_NOMOVE
+    );
+}
+
+void Window::setClientSize(const unsigned int newWidth, const unsigned int newHeight)
+{
+    RECT rectClient;
+
+    if (!GetClientRect(this->hwnd, &rectClient)) {
+        throw(GetLastError());
+    }
+
+    rectClient.right = 50 + newWidth;
+    rectClient.left = 50;
+    rectClient.bottom = 50 + newHeight;
+    rectClient.top = 50;
+
+    AdjustWindowRect(
+        &rectClient,
+        this->generateWindowStyle(),
+        NULL
+    );
+
+    SetWindowPos(
+        this->hwnd,
+        NULL,
+        0,
+        0,
+        rectClient.right - rectClient.left,
+        rectClient.bottom - rectClient.top,
+        SWP_NOMOVE
+    );
+}
+
 unsigned int Window::getXPosition() const
 {
     RECT rect;

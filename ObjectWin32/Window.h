@@ -26,6 +26,9 @@ public:
 	void setWidth(unsigned int newWidth);
 	void setHeight(unsigned int newHeight);
 	void setSize(const unsigned int newWidth, const unsigned int newHeight);
+	void setClientWidth(unsigned int newWidth);
+	void setClientHeight(unsigned int newHeight);
+	void setClientSize(const unsigned int newWidth, const unsigned int newHeight);
 	//position
 	unsigned int getXPosition() const;
 	unsigned int getYPosition() const;

@@ -2,6 +2,8 @@
 
 #include "isolator.h"
 
+#define protected public
+
 #include "Window.h"
 #include "Instance.h"
 #include "File.h"
@@ -169,6 +171,55 @@ TEST(Window, getClientHeight) {
 
     unsigned int clientHeight = w.getClientHeight();
     ASSERT_EQ(clientHeight, 95);
+}
+
+TEST(Window, setClientWidth) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setClientWidth(250);
+
+    RECT rectClient;
+
+    GetClientRect(w.hwnd, &rectClient);
+
+    ASSERT_EQ(rectClient.right - rectClient.left, 250);
+}
+
+TEST(Window, setClientHeight) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setClientHeight(200);
+
+    RECT rectClient;
+
+    GetClientRect(w.hwnd, &rectClient);
+
+    ASSERT_EQ(rectClient.bottom - rectClient.top, 200);
+}
+
+TEST(Window, setClientSize) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setClientSize(300, 200);
+
+    RECT rectClient;
+
+    GetClientRect(w.hwnd, &rectClient);
+
+    ASSERT_EQ(rectClient.bottom - rectClient.top, 200);
+    ASSERT_EQ(rectClient.right - rectClient.left, 300);
 }
 
 TEST(Window, getPosX) {
