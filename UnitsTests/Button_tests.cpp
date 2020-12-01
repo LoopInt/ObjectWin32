@@ -48,3 +48,44 @@ TEST(Button, getYPos) {
 
     ASSERT_EQ(b.getYPos(), 10);
 }
+
+TEST(Button, setXPos) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+    w.create(GetModuleHandle(NULL));
+
+    Button b(w, L"OK");
+
+    b.setXPos(20);
+
+    ASSERT_EQ(b.getXPos(), 20);
+}
+
+TEST(Button, setYPos) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+    w.create(GetModuleHandle(NULL));
+
+    Button b(w, L"OK");
+
+    b.setYPos(20);
+
+    ASSERT_EQ(b.getYPos(), 20);
+}
+
+TEST(Button, setPos) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+    w.create(GetModuleHandle(NULL));
+
+    Button b(w, L"OK");
+
+    b.setXPos(25);
+    b.setYPos(20);
+
+    ASSERT_EQ(b.getYPos(), 20);
+    ASSERT_EQ(b.getXPos(), 25);
+}

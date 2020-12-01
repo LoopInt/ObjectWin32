@@ -66,3 +66,24 @@ int Button::getYPos() const
 
     return rectButton.top - this->parent.getClientYPosition();
 }
+
+void Button::setXPos(int newXPos)
+{
+    if (!SetWindowPos(this->hwnd, NULL, newXPos, this->getYPos(), 0, 0, SWP_NOSIZE)) {
+        throw(GetLastError());
+    }
+}
+
+void Button::setYPos(int newYPos)
+{
+    if (!SetWindowPos(this->hwnd, NULL, this->getXPos(), newYPos, 0, 0, SWP_NOSIZE)) {
+        throw(GetLastError());
+    }
+}
+
+void Button::setPos(int newXPos, int newYPos)
+{
+    if (!SetWindowPos(this->hwnd, NULL, newXPos, newYPos, 0, 0, SWP_NOSIZE)) {
+        throw(GetLastError());
+    }
+}

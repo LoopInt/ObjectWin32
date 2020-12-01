@@ -46,5 +46,7 @@ void guiRun(HINSTANCE hInstance, MainWindow &w) {
     w.show();
     Button b(w, L"OK");
 
+    b.setXPos(50);
+
     Instance::run();
 }

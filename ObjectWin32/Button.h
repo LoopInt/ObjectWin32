@@ -15,6 +15,10 @@ public:
 	int getXPos() const;
 	int getYPos() const;
 
+	void setXPos(int newXPos);
+	void setYPos(int newYPos);
+	void setPos(int newXPos, int newYPos);
+
 private:
 	Window& parent;
 };
