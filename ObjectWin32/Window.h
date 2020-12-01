@@ -37,6 +37,9 @@ public:
 	void setXPosition(const unsigned int newPosX);
 	void setYPosition(const unsigned int newPosY);
 	void setPosition(const unsigned int newPosX, const unsigned int newPosY);
+	void setClientXPosition(const int newPosX);
+	void setClientYPosition(const int newPosY);
+	void setClientPosition(const int newPosX, const int newPosY);
 	//maximize button
 	void disableMaximizeButton();
 	void enableMaximizeButton();

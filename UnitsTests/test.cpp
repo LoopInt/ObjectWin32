@@ -596,6 +596,43 @@ TEST(Window, setPos) {
     ASSERT_EQ(rect.top, 200);
 }
 
+TEST(Window, setClientXPos) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setClientXPosition(400);
+
+    ASSERT_EQ(w.getClientXPosition(), 400);
+}
+
+TEST(Window, setClientYPos) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setClientYPosition(400);
+
+    ASSERT_EQ(w.getClientYPosition(), 400);
+}
+
+TEST(Window, setClientPos) {
+    Instance::init(GetModuleHandle(NULL));
+
+    Window w;
+
+    w.create(GetModuleHandle(NULL));
+
+    w.setClientPosition(300, 400);
+
+    ASSERT_EQ(w.getClientYPosition(), 400);
+    ASSERT_EQ(w.getClientXPosition(), 300);
+}
+
 TEST(File, fileNotFound) {
     File file;
 

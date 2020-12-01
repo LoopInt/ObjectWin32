@@ -341,6 +341,70 @@ void Window::setPosition(const unsigned int newPosX, const unsigned int newPosY)
     }
 }
 
+void Window::setClientXPosition(const int newPosX)
+{
+    RECT rect;
+
+    if (!GetClientRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+
+    rect.left = newPosX;
+
+    AdjustWindowRect(
+        &rect,
+        this->generateWindowStyle(),
+        NULL
+    );   
+
+    if (!SetWindowPos(this->hwnd, NULL, rect.left, rect.top, 0, 0, SWP_NOSIZE)) {
+        throw(GetLastError());
+    }
+}
+
+void Window::setClientYPosition(const int newPosY)
+{
+    RECT rect;
+
+    if (!GetClientRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+
+    rect.top = newPosY;
+
+    AdjustWindowRect(
+        &rect,
+        this->generateWindowStyle(),
+        NULL
+    );
+
+    if (!SetWindowPos(this->hwnd, NULL, rect.left, rect.top, 0, 0, SWP_NOSIZE)) {
+        throw(GetLastError());
+    }
+}
+
+void Window::setClientPosition(const int newPosX, const int newPosY)
+{
+    RECT rect;
+
+    if (!GetClientRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+
+    rect.top = newPosY;
+    rect.left = newPosX;
+
+    AdjustWindowRect(
+        &rect,
+        this->generateWindowStyle(),
+        NULL
+    );
+
+    if (!SetWindowPos(this->hwnd, NULL, rect.left, rect.top, 0, 0, SWP_NOSIZE)) {
+        throw(GetLastError());
+    }
+}
+
 void Window::disableMaximizeButton()
 {
     this->maximizeButton = false;
