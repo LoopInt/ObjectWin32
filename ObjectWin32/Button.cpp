@@ -1,7 +1,8 @@
 #include "Button.h"
 #include <string>
 
-Button::Button(ObjectWindow& parent, const std::wstring& text)
+Button::Button(Window& newParent, const std::wstring& text):
+    parent(newParent)
 {
     this->hwnd = CreateWindow(
         L"BUTTON",  // Predefined class; Unicode assumed 
@@ -11,7 +12,7 @@ Button::Button(ObjectWindow& parent, const std::wstring& text)
         10,         // y position 
         25,        // Button width
         20,        // Button height
-        parent.getHandle(),     // Parent window
+        this->parent.getHandle(),     // Parent window
         NULL,       // No menu.
         NULL,
         NULL);
@@ -44,4 +45,24 @@ std::wstring Button::getText() const
     );
 
     return std::wstring(buffer);
+}
+
+int Button::getXPos() const
+{
+    RECT rectButton;
+    if (!GetWindowRect(this->hwnd, &rectButton)) {
+        throw(GetLastError());
+    }
+
+    return rectButton.left - this->parent.getClientXPosition();
+}
+
+int Button::getYPos() const
+{
+    RECT rectButton;
+    if (!GetWindowRect(this->hwnd, &rectButton)) {
+        throw(GetLastError());
+    }
+
+    return rectButton.top - this->parent.getClientYPosition();
 }
