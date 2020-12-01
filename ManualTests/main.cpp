@@ -44,7 +44,7 @@ void guiRun(HINSTANCE hInstance, MainWindow &w) {
 
     w.create(hInstance);
     w.show();
-    Button b(w);
+    Button b(w, L"OK");
 
     Instance::run();
 }

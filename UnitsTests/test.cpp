@@ -7,6 +7,7 @@
 #include "Window.h"
 #include "Instance.h"
 #include "File.h"
+#include "Button.h"
 
 TEST(Window, CreateWindow) {
     Instance::init(GetModuleHandle(NULL));
