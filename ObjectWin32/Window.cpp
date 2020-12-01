@@ -264,6 +264,52 @@ unsigned int Window::getYPosition() const
     return rect.top;
 }
 
+int Window::getClientXPosition() const
+{
+    RECT rect;
+    rect.left = 50;
+    rect.right = 250;
+    rect.top = 50;
+    rect.bottom = 145;
+
+    AdjustWindowRect(
+        &rect,
+        this->generateWindowStyle(),
+        NULL
+    );
+
+    unsigned int delta = 50 - rect.left;
+
+    if (!GetWindowRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+
+    return rect.left + delta;
+}
+
+int Window::getClientYPosition() const
+{
+    RECT rect;
+    rect.left = 0;
+    rect.right = 250;
+    rect.top = 0;
+    rect.bottom = 250;
+
+    AdjustWindowRect(
+        &rect,
+        this->generateWindowStyle(),
+        NULL
+    );
+
+    unsigned int delta = - rect.top;
+
+    if (!GetWindowRect(this->hwnd, &rect)) {
+        throw(GetLastError());
+    }
+
+    return rect.top + delta;
+}
+
 void Window::setXPosition(const unsigned int newPosX)
 {
     RECT rect;
