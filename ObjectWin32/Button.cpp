@@ -21,6 +21,16 @@ Button::~Button()
 {
 }
 
+void Button::setText(const std::wstring& text)
+{
+    SendMessage(
+        this->hwnd,
+        WM_SETTEXT,
+        NULL,
+        reinterpret_cast<LPARAM>(text.c_str())
+    );
+}
+
 std::wstring Button::getText() const
 {
     const int size = 80;
