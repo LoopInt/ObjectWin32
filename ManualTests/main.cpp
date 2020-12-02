@@ -1,6 +1,6 @@
 #include "MainWindow.h"
 #include "Instance.h"
-#include "Button.h"
+#include "PushButton.h"
 #include <thread>
 
 void guiRun(HINSTANCE hInstance, MainWindow &w);
@@ -44,7 +44,7 @@ void guiRun(HINSTANCE hInstance, MainWindow &w) {
 
     w.create(hInstance);
     w.show();
-    Button b(w, L"OK");
+    PushButton b(w, L"OK");
 
     b.setXPos(50);
 

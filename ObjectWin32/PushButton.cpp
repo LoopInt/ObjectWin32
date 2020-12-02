@@ -1,7 +1,7 @@
-#include "Button.h"
+#include "PushButton.h"
 #include <string>
 
-Button::Button(Window& newParent, const std::wstring& text):
+PushButton::PushButton(Window& newParent, const std::wstring& text):
     parent(newParent)
 {
     this->hwnd = CreateWindow(
@@ -18,11 +18,11 @@ Button::Button(Window& newParent, const std::wstring& text):
         NULL);
 }
 
-Button::~Button()
+PushButton::~PushButton()
 {
 }
 
-void Button::setText(const std::wstring& text)
+void PushButton::setText(const std::wstring& text)
 {
     SendMessage(
         this->hwnd,
@@ -32,7 +32,7 @@ void Button::setText(const std::wstring& text)
     );
 }
 
-std::wstring Button::getText() const
+std::wstring PushButton::getText() const
 {
     const int size = 80;
     wchar_t buffer[size] = L"";
@@ -47,7 +47,7 @@ std::wstring Button::getText() const
     return std::wstring(buffer);
 }
 
-int Button::getXPos() const
+int PushButton::getXPos() const
 {
     RECT rectButton;
     if (!GetWindowRect(this->hwnd, &rectButton)) {
@@ -57,7 +57,7 @@ int Button::getXPos() const
     return rectButton.left - this->parent.getClientXPosition();
 }
 
-int Button::getYPos() const
+int PushButton::getYPos() const
 {
     RECT rectButton;
     if (!GetWindowRect(this->hwnd, &rectButton)) {
@@ -67,21 +67,21 @@ int Button::getYPos() const
     return rectButton.top - this->parent.getClientYPosition();
 }
 
-void Button::setXPos(int newXPos)
+void PushButton::setXPos(int newXPos)
 {
     if (!SetWindowPos(this->hwnd, NULL, newXPos, this->getYPos(), 0, 0, SWP_NOSIZE)) {
         throw(GetLastError());
     }
 }
 
-void Button::setYPos(int newYPos)
+void PushButton::setYPos(int newYPos)
 {
     if (!SetWindowPos(this->hwnd, NULL, this->getXPos(), newYPos, 0, 0, SWP_NOSIZE)) {
         throw(GetLastError());
     }
 }
 
-void Button::setPos(int newXPos, int newYPos)
+void PushButton::setPos(int newXPos, int newYPos)
 {
     if (!SetWindowPos(this->hwnd, NULL, newXPos, newYPos, 0, 0, SWP_NOSIZE)) {
         throw(GetLastError());

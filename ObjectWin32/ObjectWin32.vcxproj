@@ -19,14 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button.h" />
+    <ClInclude Include="PushButton.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="Instance.h" />
     <ClInclude Include="ObjectWindow.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="PushButton.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Instance.cpp" />
     <ClCompile Include="ObjectWindow.cpp" />

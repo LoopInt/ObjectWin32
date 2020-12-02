@@ -3,11 +3,11 @@
 #include "Window.h"
 #include <string>
 
-class Button : public ObjectWindow
+class PushButton : public ObjectWindow
 {
 public:
-	Button(Window &newParent, const std::wstring& text);
-	~Button();
+	PushButton(Window &newParent, const std::wstring& text);
+	~PushButton();
 
 	void setText(const std::wstring& text);
 	std::wstring getText() const;
