@@ -1,8 +1,11 @@
 #include "PushButton.h"
 #include <string>
 
+unsigned int PushButton::idCount = 100;
+
 PushButton::PushButton(Window& newParent, const std::wstring& text):
-    parent(newParent)
+    parent(newParent),
+    isClicked(nullptr)
 {
     this->hwnd = CreateWindow(
         L"BUTTON",  // Predefined class; Unicode assumed 
@@ -12,10 +15,14 @@ PushButton::PushButton(Window& newParent, const std::wstring& text):
         10,         // y position 
         25,        // Button width
         20,        // Button height
-        this->parent.getHandle(),     // Parent window
-        NULL,       // No menu.
-        NULL,
+        this->parent.getHandle(),
+        (HMENU) PushButton::idCount,
+        (HINSTANCE) GetWindowLongPtr(this->hwnd, GWLP_HINSTANCE),
         NULL);
+
+    this->parent.addChildrenWidget(PushButton::idCount, this);
+
+    ++PushButton::idCount;
 }
 
 PushButton::~PushButton()
@@ -85,5 +92,18 @@ void PushButton::setPos(int newXPos, int newYPos)
 {
     if (!SetWindowPos(this->hwnd, NULL, newXPos, newYPos, 0, 0, SWP_NOSIZE)) {
         throw(GetLastError());
+    }
+}
+
+void PushButton::command(const unsigned int notif)
+{
+    switch (notif) {
+    case BN_CLICKED:
+        if (this->isClicked) {
+            this->isClicked();
+        }
+        break;
+    default:
+        break;
     }
 }

@@ -2,10 +2,12 @@
 
 #include <Windows.h>
 
-class ObjectWindow
+class ObjectWin32
 {
 public:
 	HWND getHandle() const;
+	virtual void command(const unsigned int notif) = 0;
+
 protected:
 	HWND hwnd;
 };

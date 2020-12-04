@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Window.h"
+#include "ObjectWin32.h"
 #include <string>
 
-class PushButton : public ObjectWindow
+class PushButton : public ObjectWin32
 {
 public:
 	PushButton(Window &newParent, const std::wstring& text);
@@ -19,7 +20,16 @@ public:
 	void setYPos(int newYPos);
 	void setPos(int newXPos, int newYPos);
 
+	//signals
+
+	virtual void command(const unsigned int notif);
+
+	void (*isClicked)();
+
+	void command();
+
 private:
 	Window& parent;
+	static unsigned int idCount;
 };
 

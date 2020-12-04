@@ -437,8 +437,27 @@ void Window::enableMinimizeButton()
     }
 }
 
+void Window::addChildrenWidget(const unsigned int id, ObjectWin32* newChild)
+{
+    this->childs[id] = newChild;
+}
+
+void Window::command(const unsigned int notif)
+{
+    return;
+}
+
 LRESULT Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+    switch (uMsg)
+    {
+
+    case WM_COMMAND:
+        const unsigned int id = LOWORD(wParam);
+        const unsigned int notif = HIWORD(wParam);
+        this->childs[id]->command(notif);
+        return true;
+    }
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 

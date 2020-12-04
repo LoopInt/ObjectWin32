@@ -1,9 +1,10 @@
 #pragma once
 
-#include "ObjectWindow.h"
+#include "ObjectWin32.h"
 #include <string>
+#include <map>
 
-class Window : public ObjectWindow
+class Window : public ObjectWin32
 {
 public:
 	explicit Window();
@@ -47,6 +48,10 @@ public:
 	void disableMinimizeButton();
 	void enableMinimizeButton();
 
+	void addChildrenWidget(const unsigned int id, ObjectWin32* newChild);
+
+	virtual void command(const unsigned int notif);
+
 private:
 	LRESULT WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	std::wstring label;
@@ -57,5 +62,7 @@ private:
 
 	bool minimizeButton;
 	bool maximizeButton;
+
+	std::map<unsigned int, ObjectWin32*> childs;
 };
 

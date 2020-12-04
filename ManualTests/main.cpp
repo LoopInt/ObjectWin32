@@ -33,6 +33,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     return 0;
 }
 
+void fct() {
+    return;
+}
+
 void guiRun(HINSTANCE hInstance, MainWindow &w) {
     Instance::init(hInstance);
 
@@ -45,8 +49,10 @@ void guiRun(HINSTANCE hInstance, MainWindow &w) {
     w.create(hInstance);
     w.show();
     PushButton b(w, L"OK");
+    b.isClicked = &fct;
 
     b.setXPos(50);
 
     Instance::run();
 }
+
